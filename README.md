@@ -14,7 +14,6 @@
 - Kafka
 - Keycloak
 - Angular
-- Test Containers with Wiremock
 - Grafana Stack (Prometheus, Grafana, Loki and Tempo)
 - API Gateway using Spring Cloud Gateway MVC
 - Kubernetes
