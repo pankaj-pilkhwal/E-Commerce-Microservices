@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: Order-Service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/order-service
+    username: postgres
+    password: password
+
+  sql:
+    init:
+      mode: always
+
+server:
+  port: 8081
