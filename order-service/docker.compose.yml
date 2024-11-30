@@ -1,10 +1,25 @@
 version: '4'
 
 services:
-  db:
-    image: postgres:17.2
-    ports:
-      - "5432:5432"
+#  db:
+#    image: postgres:17.2
+#    container_name: order-service-db-container
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      POSTGRES_PASSWORD: password
+#      POSTGRES_DB: order_service
+#    volumes:
+#      - ./psql:/var/lib/order-
+#      - ./docker/psql/asdfinit.sql:/docker-entrypoint-initdb.d/asdfinit.sql
+
+  mysql:
+    image: mysql:8.3.0
+    container_name: order-service-mysql-db
     environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: order-service
+      MYSQL_ROOT_PASSWORD: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql

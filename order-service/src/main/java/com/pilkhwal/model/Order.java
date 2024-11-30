@@ -1,14 +1,12 @@
 package com.pilkhwal.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "t_orders")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
