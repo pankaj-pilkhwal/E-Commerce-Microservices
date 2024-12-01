@@ -1,9 +1,12 @@
 package com.pilkhwal.service;
 
+import com.pilkhwal.model.Inventory;
 import com.pilkhwal.repository.InventoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,4 +22,7 @@ public class InventoryService {
         return isInStock;
     }
 
+    public List<Inventory> getAll() {
+        return inventoryRepository.findAll();
+    }
 }
