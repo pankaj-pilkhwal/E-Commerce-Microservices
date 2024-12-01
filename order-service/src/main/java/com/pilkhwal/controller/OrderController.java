@@ -18,9 +18,7 @@ public class OrderController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public String placeOrder(@RequestBody OrderRequest orderRequest) {
-        orderService.placeOrder(orderRequest);
-
-        return "order placed successfully";
+        return orderService.placeOrder(orderRequest);
     }
 
     @GetMapping
@@ -28,4 +26,6 @@ public class OrderController {
     public List<OrderResponse> getAllOrders() {
         return orderService.getAllOrders();
     }
+
+
 }

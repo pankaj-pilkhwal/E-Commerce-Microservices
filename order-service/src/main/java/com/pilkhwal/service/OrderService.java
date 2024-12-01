@@ -6,6 +6,7 @@ import com.pilkhwal.model.Order;
 import com.pilkhwal.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,16 +15,31 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
+    private final RestClient client;
 
-    public void placeOrder(OrderRequest orderRequest) {
-        Order order = Order.builder()
-                .orderNumber(UUID.randomUUID().toString())
-                .price(orderRequest.price())
-                .skuCode(orderRequest.skuCode())
-                .quantity(orderRequest.quantity())
-                .build();
+    public String placeOrder(OrderRequest orderRequest) {
 
-        orderRepository.save(order);
+        boolean isValid = Boolean.TRUE.equals(client.get()
+                        .uri(uriBuilder -> uriBuilder
+                                .queryParam("skuCode", orderRequest.skuCode())
+                                .queryParam("quantity", orderRequest.quantity())
+                                .build())
+                .retrieve()
+                .body(Boolean.class));
+
+        if(isValid) {
+            Order order = Order.builder()
+                    .orderNumber(UUID.randomUUID().toString())
+                    .price(orderRequest.price())
+                    .skuCode(orderRequest.skuCode())
+                    .quantity(orderRequest.quantity())
+                    .build();
+            orderRepository.save(order);
+
+            return "Order place successfully";
+        }
+
+        return "product with skuCode" + orderRequest.skuCode() + " is not in stock.";
     }
 
     public List<OrderResponse> getAllOrders() {
