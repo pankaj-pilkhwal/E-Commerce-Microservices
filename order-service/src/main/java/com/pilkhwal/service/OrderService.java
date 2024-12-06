@@ -20,10 +20,11 @@ public class OrderService {
     public String placeOrder(OrderRequest orderRequest) {
 
         boolean isValid = Boolean.TRUE.equals(client.get()
-                        .uri(uriBuilder -> uriBuilder
-                                .queryParam("skuCode", orderRequest.skuCode())
-                                .queryParam("quantity", orderRequest.quantity())
-                                .build())
+                .uri(uriBuilder -> uriBuilder
+                        .queryParam("skuCode", orderRequest.skuCode())
+                        .queryParam("quantity", orderRequest.quantity())
+                        .build()
+                )
                 .retrieve()
                 .body(Boolean.class));
 
@@ -39,7 +40,7 @@ public class OrderService {
             return "Order place successfully";
         }
 
-        return "product with skuCode" + orderRequest.skuCode() + " is not in stock.";
+        return "product with skuCode \"" + orderRequest.skuCode() + "\" is not in stock.";
     }
 
     public List<OrderResponse> getAllOrders() {

@@ -34,3 +34,4 @@ build/
 /inventory-service/data/
 /order-service/data/
 /product-service/data/
+/api-gateway/volume-data/
