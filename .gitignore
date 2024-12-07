@@ -33,5 +33,6 @@ build/
 .vscode/
 /inventory-service/data/
 /order-service/data/
+order-service/docker/.DS_Store
 /product-service/data/
 /api-gateway/volume-data/
